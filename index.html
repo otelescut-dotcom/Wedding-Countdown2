@@ -3,71 +3,37 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Wedding Countdown 💍</title>
+<title>Tomer & Ricky 💍</title>
 
 <style>
-:root{
-  --radius: 22px;
-  --shadow: 0 18px 40px rgba(0,0,0,0.15);
-}
-
-*{ box-sizing:border-box; }
-
 body{
   margin:0;
   min-height:100vh;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:18px;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  background: radial-gradient(circle at top, #ffffff, #f1f3f6 55%, #e9edf3);
-  overflow:hidden;
+  font-family: Arial, sans-serif;
+  background:#f6f6f6;
 }
 
-/* hearts */
-#hearts{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
-}
-
-.heart{
-  position:absolute;
-  bottom:-30px;
-  font-size:18px;
-  animation:floatUp linear forwards;
-  opacity:0;
-}
-
-@keyframes floatUp{
-  0%{ transform:translateY(0) scale(0.8); opacity:0 }
-  10%{ opacity:1 }
-  100%{ transform:translateY(-800px) scale(1.4); opacity:0 }
-}
-
-/* card */
 .card{
-  width:min(560px, 94vw);
-  background:rgba(255,255,255,0.93);
-  backdrop-filter: blur(6px);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
+  background:white;
+  border-radius:20px;
   padding:22px;
   text-align:center;
-  position:relative;
-  z-index:2;
+  width:90%;
+  max-width:360px;
+  box-shadow:0 12px 30px rgba(0,0,0,0.2);
 }
 
 h1{
-  font-size:clamp(22px, 5vw, 30px);
-  margin:6px 0;
+  margin:8px 0;
+  font-size:22px;
 }
 
 .names{
-  font-size:clamp(16px, 4vw, 20px);
-  font-weight:700;
+  font-weight:bold;
+  margin-bottom:6px;
 }
 
 .date{
@@ -75,32 +41,28 @@ h1{
   margin-bottom:10px;
 }
 
-.couple-img{
-  width:min(300px, 80vw);
-  margin:16px auto;
-  display:block;
-  border-radius:22px;
-  box-shadow:0 14px 30px rgba(0,0,0,0.25);
+img{
+  width:100%;
+  border-radius:16px;
+  margin:12px 0;
 }
 
 #countdown{
-  font-size:clamp(26px, 7vw, 42px);
-  font-weight:800;
-  margin:10px 0;
+  font-size:26px;
+  font-weight:bold;
+  margin-top:10px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="hearts"></div>
-
 <div class="card">
   <h1>Countdown to our wedding 💍</h1>
   <div class="names">Tomer & Ricky</div>
-  <div class="date">7 June 2026 • 19:30</div>
+  <div class="date">7 June 2026</div>
 
-  <img src="couple.png" class="couple-img" alt="Bride and Groom">
+  <img src="couple.png" alt="Bride and Groom">
 
   <div id="countdown">Loading…</div>
 </div>
@@ -117,29 +79,17 @@ function update(){
     return;
   }
 
-  const s = Math.floor(diff/1000);
-  const d = Math.floor(s/86400);
-  const h = Math.floor((s%86400)/3600);
-  const m = Math.floor((s%3600)/60);
-  const sec = s%60;
+  const s = Math.floor(diff / 1000);
+  const d = Math.floor(s / 86400);
+  const h = Math.floor((s % 86400) / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const sec = s % 60;
 
   el.textContent = `${d}d ${h}h ${m}m ${sec}s`;
 }
 
 setInterval(update,1000);
 update();
-
-/* hearts */
-const hearts = document.getElementById("hearts");
-setInterval(()=>{
-  const h = document.createElement("div");
-  h.className = "heart";
-  h.textContent = "❤️";
-  h.style.left = Math.random()*100 + "vw";
-  h.style.animationDuration = (4 + Math.random()*3) + "s";
-  hearts.appendChild(h);
-  setTimeout(()=>h.remove(),7000);
-},350);
 </script>
 
 </body>
